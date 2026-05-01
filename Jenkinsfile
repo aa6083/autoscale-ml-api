@@ -3,9 +3,9 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_USER = 'your_dockerhub_username'
-        IMAGE_NAME     = 'ml-inference-api'
-        AWS_KEY        = 'your-key-pair-name'
+    DOCKERHUB_USER = 'affanalrayyan'
+    IMAGE_NAME     = 'ml-inference-api'
+    AWS_KEY        = 'projectkey'
     }
 
     stages {

@@ -18,7 +18,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t %DOCKERHUB_USER%/%IMAGE_NAME%:latest .'
+                bat 'docker build -t %DOCKERHUB_USER%/%IMAGE_NAME%:latest .'
             }
         }
 
@@ -29,8 +29,8 @@ pipeline {
                     usernameVariable: 'DOCKER_USER',
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
-                    sh 'echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin'
-                    sh 'docker push %DOCKERHUB_USER%/%IMAGE_NAME%:latest'
+                    bat 'docker login -u %DOCKER_USER% -p %DOCKER_PASS%'
+                    bat 'docker push %DOCKERHUB_USER%/%IMAGE_NAME%:latest'
                 }
             }
         }
@@ -42,8 +42,8 @@ pipeline {
                     string(credentialsId: 'aws-secret-key', variable: 'AWS_SECRET_ACCESS_KEY')
                 ]) {
                     dir('terraform') {
-                        sh 'terraform init'
-                        sh 'terraform apply -auto-approve -var="key_name=%AWS_KEY%"'
+                        bat 'terraform init'
+                        bat 'terraform apply -auto-approve -var="key_name=%AWS_KEY%"'
                     }
                 }
             }
@@ -52,7 +52,7 @@ pipeline {
         stage('Done') {
             steps {
                 dir('terraform') {
-                    sh 'terraform output app_url'
+                    bat 'terraform output app_url'
                 }
                 echo '✅ App is LIVE on AWS!'
             }

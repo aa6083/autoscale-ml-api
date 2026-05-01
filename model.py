@@ -1,9 +1,9 @@
 from transformers import pipeline
 
-# Loads once when app starts
 sentiment_model = pipeline(
     "sentiment-analysis",
-    model="distilbert-base-uncased-finetuned-sst-2-english"
+    model="distilbert-base-uncased-finetuned-sst-2-english",
+    device=-1  # force CPU
 )
 
 def analyze(text: str):

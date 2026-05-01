@@ -5,12 +5,15 @@ variable "aws_region" {
 variable "key_name" {
   description = "Your AWS Key Pair name"
   type        = string
+  default     = "projectkey"
+  
+
 }
 
 variable "ami_id" {
-  default = "ami-0c02fb55956c7d316"  # Amazon Linux 2 us-east-1
+  default = "ami-0ed094fb1304fd857"  # Amazon Linux 2 us-east-1
 }
 
 variable "instance_type" {
-  default = "t2.medium"  # needs RAM for ML model
+  default = "t3.small"  # needs RAM for ML model
 }

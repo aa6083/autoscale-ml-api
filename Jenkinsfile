@@ -18,7 +18,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t %DOCKERHUB_USER%/%IMAGE_NAME%:latest .'
+                bat 'docker build --no-cache -t %DOCKERHUB_USER%/%IMAGE_NAME%:latest .'
             }
         }
 
